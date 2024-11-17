@@ -563,23 +563,34 @@ php artisan migrate
 
 ## Testing it out
 
-We're now ready to send a Chirp using the form we just created! We won't be able to see the result yet because we haven't displayed existing Chirps on the page.
-Chirp form
+We're now ready to send a Chirp using the form we just created!
 
-If you leave the message field empty, or enter more than 255 characters, then you'll see the validation in action.
+We won't be able to see the result yet because we haven't displayed
+existing Chirps on the page.
+
+![alt Chirp form](./images/chirp-form-filled.png)
+
+If you leave the message field empty, or enter more than 255 characters,
+then you'll see the validation in action.
 
 ## Artisan Tinker
 
-This is great time to learn about Artisan Tinker, a REPL (Read-eval-print loop) where you can execute arbitrary PHP code in your Laravel application.
+This is great time to learn about `Artisan Tinker`, a REPL (Read-eval-print loop)
+where you can execute arbitrary PHP code in your Laravel application.
 
 In your console, start a new tinker session:
 
+```bash
 php artisan tinker
+```
 
 Next, execute the following code to display the Chirps in your database:
 
+```bash
 App\Models\Chirp::all();
+```
 
+```bash
 => Illuminate\Database\Eloquent\Collection {#4512
      all: [
        App\Models\Chirp {#4514
@@ -591,5 +602,6 @@ App\Models\Chirp::all();
        },
      ],
    }
+```
 
 You may exit Tinker by using the exit command, or by pressing Ctrl + c.
