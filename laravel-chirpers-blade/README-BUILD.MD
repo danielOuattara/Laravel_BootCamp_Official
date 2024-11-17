@@ -503,57 +503,63 @@ documentation.
 
 ## Updating the migration
 
-During the creation of the application, Laravel already applied the default migrations that are included in the database/migrations directory. You may inspect the current database structure by using the php artisan db:show and php artisan db:table commands:
+During the creation of the application, Laravel already applied the
+default migrations that are included in the database/migrations
+directory. You may inspect the current database structure by using
+the following commands:
 
+```bash
 php artisan db:show
 php artisan db:table users
+```
 
-So, the only thing missing is extra columns in our database to store the relationship between a Chirp and its User and the message itself. Remember the database migration we created earlier? It's time to open that file to add some extra columns:
-database/migrations/<timestamp>_create_chirps_table.php
+So, the only thing missing is extra columns in our database to store
+the relationship between a `Chirp` and its `User` and the message
+itself.
+
+Remember the database migration we created earlier? It's time to open
+that file to add some extra columns:
 
 ```php
+# database/migrations/<timestamp>_create_chirps_table.php
 <?php
 
  ...
 
 return new class extends Migration
-
 {
-
     /**
-
      * Run the migrations.
-
      */
 
     public function up(): void
-
     {
-
         Schema::create('chirps', function (Blueprint $table) {
-
             $table->id();
-
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-
             $table->string('message');
-
             $table->timestamps();
-
         });
-
     }
-
  ...
-
 };
 ```
 
-We haven't migrated the database since we added this migration, so let's do it now:
+We haven't migrated the database since we added this migration, so
+let's do it now:
 
+```bash
 php artisan migrate
+```
 
-Each database migration will only be run once. To make additional changes to a table, you will need to create another migration. During development, you may wish to update an undeployed migration and rebuild your database from scratch using the php artisan migrate:fresh command.
+**NOTICE:**
+
+- Each database migration will only be run once. To make additional
+  changes to a table, you will need to create another migration.
+
+- During development, you may wish to update an `undeployed` migration
+  and rebuild your database from scratch using the `php artisan migrate:fresh`
+  command.
 
 ## Testing it out
 
