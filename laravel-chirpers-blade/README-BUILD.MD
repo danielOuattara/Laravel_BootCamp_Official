@@ -49,3 +49,28 @@ Almost every feature you build will involve all of these pieces working together
   - `app/Models/Chirp.php` - The Eloquent model.
   - `database/migrations/<timestamp>_create_chirps_table.php` - The database migration that will create your database table.
   - `app/Http/Controllers/ChirpController.php` - The HTTP controller that will take incoming requests and return responses.
+
+## Routing
+
+We will also need to create URLs for our controller.
+
+To start with, we are going to enable two routes:
+
+- The `index` route will display our form and a listing of Chirps.
+- The `store` route will be used for saving new Chirps.
+
+We are also going to place these routes behind two middleware:
+
+- The `auth` middleware ensures that only logged-in users can access the route.
+- The `verified` middleware will be used if you decide to enable email verification.
+
+This will create the following routes:
+
+| Verb |   URI   | Action |  Route Name  |
+|:----:|:-------:|:------:|:------------:|
+| GET  | /chirps | index  | chirps.index |
+| POST | /chirps | store  | chirps.store |
+
+NOTE:  You may view all of the routes for your application by running the `php artisan route:list` command.
+
+- Let's test our route and controller by returning a test message from the index method of our new ChirpController class:
