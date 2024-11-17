@@ -74,3 +74,28 @@ This will create the following routes:
 NOTE:  You may view all of the routes for your application by running the `php artisan route:list` command.
 
 - Let's test our route and controller by returning a test message from the index method of our new ChirpController class:
+
+##  Blade
+
+- Let's update the index method of our ChirpController class to render a Blade view: `app/Http/Controllers/ChirpController.php`
+
+- then create our Blade view template with a form for creating new Chirps
+
+`resources/views/chirps/index.blade.php`
+
+```php
+<x-app-layout>
+    <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+        <form method="POST" action="{{ route('chirps.store') }}">
+            @csrf
+            <textarea
+                name="message"
+                placeholder="{{ __('What\'s on your mind?') }}"
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+            >{{ old('message') }}</textarea>
+            <x-input-error :messages="$errors->get('message')" class="mt-2" />
+            <x-primary-button class="mt-4">{{ __('Chirp') }}</x-primary-button>
+        </form>
+    </div>
+</x-app-layout>
+```
