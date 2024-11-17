@@ -99,3 +99,33 @@ NOTE:  You may view all of the routes for your application by running the `php a
     </div>
 </x-app-layout>
 ```
+
+## Navigation menu
+
+- Update the navigation.blade.php component provided by Breeze to add a menu item for desktop screens
+
+`resources/views/layouts/navigation.blade.php`
+
+```php
+<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        {{ __('Dashboard') }}
+    </x-nav-link>
+    <x-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
+        {{ __('Chirps') }}
+    </x-nav-link>
+</div>
+```
+
+- And also for mobile screens:
+
+```php
+<div class="pt-2 pb-3 space-y-1">
+    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+        {{ __('Dashboard') }}
+    </x-responsive-nav-link>
+    <x-responsive-nav-link :href="route('chirps.index')" :active="request()->routeIs('chirps.index')">
+        {{ __('Chirps') }}
+    </x-responsive-nav-link>
+</div>
+```
